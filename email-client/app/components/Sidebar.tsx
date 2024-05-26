@@ -4,9 +4,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { IconType } from "react-icons";
 import { BsFillSendFill } from "react-icons/bs";
-import { FaInbox, FaLessThan, FaRegStar } from "react-icons/fa";
+import { FaInbox, FaLessThan, FaPlus, FaRegStar } from "react-icons/fa";
 import { MdDrafts } from "react-icons/md";
-
+import { useSidebarState } from "../hooks/sidebarState";
+import "./sidebarStyle.css"
 type sidebarItemsType = {
   title: string;
   icon: IconType;
@@ -36,55 +37,45 @@ const sidebarItems: sidebarItemsType[] = [
 ];
 
 export default function Sidebar() {
-  const [sidebarClose, setSidebarClose] = useState(false);
+  const sidebarClose = useSidebarState((s) => s.sidebarClose);
 
   return (
     <div
-      className={`${sidebarClose ? "w-14" : "w-48"} p-4 ps-0 border-2 h-[100vh] box-content `}
+      style={{
+        width: sidebarClose ? "2.5rem" : "12rem",
+        transition: "all 0.5s ease",
+      }}
+      className={`p-4 ps-0 border-2 h-[100vh] box-content bg-[#f6f8fc]`}
     >
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center ps-2">
-          <Image
-            src="/images/logo.png"
-            alt="logo"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-          {!sidebarClose && <span className="font-extrabold">Mail Mover</span>}
-        </div>
-        <span
-          className={`ms-5 cursor-pointer transition-transform ${
-            sidebarClose ? "rotate-180" : ""
-          }`}
-          onClick={() => {
-            setSidebarClose(!sidebarClose);
-          }}
-        >
-          <FaLessThan />
-        </span>
-      </div>
-      <hr className="my-4" />
       <div>
-        {
-            sidebarClose ? sidebarItems.map((item, index) => (
-                    <div key={index} className="p-2 cursor-pointer hover:bg-gray-200">
-                      <item.icon />
-                    </div>
-                  ))
-            :
-            sidebarItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center px-4 py-4 cursor-pointer hover:bg-gray-200"
-                    >
-                      <item.icon className="mr-2" />
-                      <span>{item.title}</span>
-                    </div>
-            ))
-        }
+        {sidebarClose ? (
+          <>
+            <div className="p-2 py-4 bg-[#3661a4] text-white rounded-2xl flex justify-center items-center cursor-pointer showshadow">
+              <FaPlus />
+            </div>
+            {sidebarItems.map((item, index) => (
+              <div key={index} className="p-4 cursor-s hover:bg-gray-200 ">
+                <item.icon />
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <div className="p-4 bg-[#3661a4] text-white rounded-2xl flex justify-between items-center cursor-pointer showshadow">
+              New Message <FaPlus />
+            </div>
+            {sidebarItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center p-4 cursor-pointer hover:bg-gray-200"
+              >
+                <item.icon className="mr-2" />
+                <span>{item.title}</span>
+              </div>
+            ))}
+          </>
+        )}
       </div>
-    
     </div>
   );
 }

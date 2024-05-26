@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { create } from "zustand"
 
-function useSidebarState(){
-    const [sidebarClose, setSidebarClose] = useState(false);
-    return {sidebarClose, setSidebarClose};
+interface sidebarState{
+    sidebarClose:boolean;
+    setSidebarClose:any;
 }
+
+export  const useSidebarState = create<sidebarState>((set)=>({
+    sidebarClose:false,
+    setSidebarClose(state:boolean){
+        set({sidebarClose:state},false);
+    }
+}))

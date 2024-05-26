@@ -11,14 +11,16 @@ export const metadata: Metadata = {
   description: "Created By Priyanshu Agarwal",
 };
 
-export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Navbar />
         <div className="flex">
-          <Sidebar/>  
-            <Navbar />
-            {children}
+          <Sidebar />
+          {children}
         </div>
       </body>
     </html>
