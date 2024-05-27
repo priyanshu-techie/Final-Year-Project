@@ -42,7 +42,7 @@ export default function Sidebar() {
   return (
     <div
       style={{
-        width: sidebarClose ? "2.5rem" : "12rem",
+        width: sidebarClose ? "2.5rem" : "20rem",
         transition: "all 0.5s ease",
       }}
       className={`p-4 ps-0 border-2 h-[100vh] box-content bg-[#f6f8fc]`}
@@ -61,7 +61,7 @@ export default function Sidebar() {
           </>
         ) : (
           <>
-            <div className="p-4 bg-[#3661a4] text-white rounded-2xl flex justify-between items-center cursor-pointer showshadow">
+            <div className="p-4 bg-[#3661a4] text-white rounded-2xl flex justify-between items-center cursor-pointer showshadow whitespace-nowrap gap-2">
               New Message <FaPlus />
             </div>
             {sidebarItems.map((item, index) => (

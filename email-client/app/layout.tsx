@@ -20,7 +20,9 @@ export default function RootLayout({
         <Navbar />
         <div className="flex">
           <Sidebar />
-          {children}
+          <div className="w-full">
+            {children}
+          </div>
         </div>
       </body>
     </html>
