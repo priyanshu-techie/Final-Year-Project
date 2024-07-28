@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13",
+    "smtp-server": "^3.13.4"
+  },
+  "name": "email-server",
+  "version": "1.0.0",
+  "description": "This is a final year project by priyanshu agrawal",
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/smtp-server": "^3.5.10",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Priyanshu Agrawal",
+  "license": "ISC"
+}

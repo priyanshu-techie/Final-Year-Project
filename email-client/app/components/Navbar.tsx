@@ -11,7 +11,7 @@ export default function Navbar() {
   const setSidebarClose = useSidebarState((state) => state.setSidebarClose);
 
   return (
-    <div className=" border-2 flex p-4 bg-[#f6f8fc] justify-between">
+    <div className=" border-2 flex p-4 bg-[#f6f8fc] justify-between sticky top-0 h-16">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center ps-2">
           <span
