@@ -1,0 +1,97 @@
+{
+    "attachments": [],
+    "headers": {},
+    "headerLines": [
+        {
+            "key": "",
+            "line": "</b>"
+        },
+        {
+            "key": "",
+            "line": "----_NmP-4954b853ede10a9f-Part_1"
+        }
+    ],
+    "html": false
+}
+{
+    "attachments": [],
+    "headers": {},
+    "headerLines": [
+        {
+            "key": "",
+            "line": "--"
+        }
+    ],
+    "html": false
+}
+{
+    "attachments": [],
+    "headers": {},
+    "headerLines": [
+        {
+            "key": "from",
+            "line": "From: Sender Name <sender@example.com>"
+        },
+        {
+            "key": "to",
+            "line": "To: recipient@example.com"
+        },
+        {
+            "key": "subject",
+            "line": "Subject: =?UTF-8?Q?Hello_=E2=9C=94?="
+        },
+        {
+            "key": "message-id",
+            "line": "Message-ID: <e05bd9c6-42c5-7116-413c-f8abb4968224@example.com>"
+        },
+        {
+            "key": "date",
+            "line": "Date: Mon, 29 Jul 2024 04:06:06 +0000"
+        },
+        {
+            "key": "mime-version",
+            "line": "MIME-Version: 1.0"
+        },
+        {
+            "key": "content-type",
+            "line": "Content-Type: multipart/alternative;\r\n boundary=\"--_NmP-4954b853ede10a9f-Part_1\""
+        }
+    ],
+    "subject": "Hello ✔",
+    "date": "2024-07-29T04:06:06.000Z",
+    "to": {
+        "value": [
+            {
+                "address": "recipient@example.com",
+                "name": ""
+            }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:recipient@example.com\" class=\"mp_address_email\">recipient@example.com</a></span>",
+        "text": "recipient@example.com"
+    },
+    "from": {
+        "value": [
+            {
+                "address": "sender@example.com",
+                "name": "Sender Name"
+            }
+        ],
+        "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Sender Name</span> &lt;<a href=\"mailto:sender@example.com\" class=\"mp_address_email\">sender@example.com</a>&gt;</span>",
+        "text": "\"Sender Name\" <sender@example.com>"
+    },
+    "messageId": "<e05bd9c6-42c5-7116-413c-f8abb4968224@example.com>",
+    "html": false
+}
+{
+    "attachments": [],
+    "headers": {},
+    "headerLines": [
+        {
+            "key": "",
+            "line": ""
+        }
+    ],
+    "text": "\n----_NmP-4954b853ede10a9f-Part_1\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 7bit\n\nHello world?\n----_NmP-4954b853ede10a9f-Part_1\nContent-Type: text/html; charset=utf-8\nContent-Transfer-Encoding: 7bit\n\n<b>Hello world?",
+    "textAsHtml": "<p>----_NmP-4954b853ede10a9f-Part_1<br/>Content-Type: text/plain; charset=utf-8<br/>Content-Transfer-Encoding: 7bit</p><p>Hello world?<br/>----_NmP-4954b853ede10a9f-Part_1<br/>Content-Type: text/html; charset=utf-8<br/>Content-Transfer-Encoding: 7bit</p><p>&lt;b&gt;Hello world?</p>",
+    "html": false
+}
