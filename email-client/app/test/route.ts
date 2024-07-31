@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
 
     try {
        await connectMongodb();
-       await sendEmail({to:["priyanshu100agrawal@gmail.com"], subject:"Test Email", content:"Test Email"});
+    //    await sendEmail({to:["priyanshu100agrawal@gmail.com"], subject:"Test Email", content:"Test Email"});
        return NextResponse.json({status:"OK"});
     } catch (error) {
         console.log(error)
