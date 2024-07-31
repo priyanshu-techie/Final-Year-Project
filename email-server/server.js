@@ -75,7 +75,6 @@ var server = new smtp_server_1.SMTPServer({
                         return [4 /*yield*/, (0, mailparser_1.simpleParser)(emailData)];
                     case 1:
                         parsed = _c.sent();
-                        console.log('Email received. Parsed - ', parsed);
                         email = new email_1.default({
                             from: (_a = parsed.from) === null || _a === void 0 ? void 0 : _a.text,
                             // @ts-ignore
