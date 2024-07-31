@@ -20,7 +20,7 @@ const server:SMTPServer = new SMTPServer({
 
     onRcptTo(address, session, callback) {
         console.log('Recive to ', address.address, " session id ", session.id );
-        if(address.address !== "abc@priyanshudev.tech")
+        if(address.address !== "dspmu@priyanshudev.tech")
             callback(new Error("Invalid Recipient"));
         else
             callback();

@@ -38,6 +38,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var smtp_server_1 = require("smtp-server");
 var mailparser_1 = require("mailparser");
+var mongodb_1 = require("./connection/mongodb");
+var email_1 = require("./models/email");
+(0, mongodb_1.connectToDB)();
 var server = new smtp_server_1.SMTPServer({
     allowInsecureAuth: true,
     authOptional: true,
@@ -51,28 +54,51 @@ var server = new smtp_server_1.SMTPServer({
     },
     onRcptTo: function (address, session, callback) {
         console.log('Recive to ', address.address, " session id ", session.id);
-        // if(address.address !== "abc@priyanshudev.tech")
-        //     callback(new Error("Invalid Recipient"));
-        // else
-        callback();
+        if (address.address !== "dspmu@priyanshudev.tech")
+            callback(new Error("Invalid Recipient"));
+        else
+            callback();
     },
     onData: function (stream, session, callback) {
         var _this = this;
-        stream.on("data", function (data) { return __awaiter(_this, void 0, void 0, function () {
-            var parsed;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+        var emailData = '';
+        stream.on('data', function (chunck) {
+            emailData += chunck.toString();
+        });
+        stream.on('end', function () { return __awaiter(_this, void 0, void 0, function () {
+            var parsed, email, err_1;
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        console.log("On data we are getting this data:");
-                        return [4 /*yield*/, (0, mailparser_1.simpleParser)(data)];
+                        _c.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, (0, mailparser_1.simpleParser)(emailData)];
                     case 1:
-                        parsed = _a.sent();
-                        console.log(JSON.stringify(parsed));
+                        parsed = _c.sent();
+                        console.log('Email received. Parsed - ', parsed);
+                        email = new email_1.default({
+                            from: (_a = parsed.from) === null || _a === void 0 ? void 0 : _a.text,
+                            // @ts-ignore
+                            to: (_b = parsed.to) === null || _b === void 0 ? void 0 : _b.text,
+                            subject: parsed.subject,
+                            message: parsed.text,
+                            status: 'received',
+                            type: 'received'
+                        });
+                        return [4 /*yield*/, email.save()];
+                    case 2:
+                        _c.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_1 = _c.sent();
+                        console.log('Error parsing email', err_1);
+                        return [3 /*break*/, 4];
+                    case 4:
+                        callback();
                         return [2 /*return*/];
                 }
             });
         }); });
-        stream.on("end", callback);
     },
 });
 server.listen(25, function () {
