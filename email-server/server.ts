@@ -36,7 +36,7 @@ const server:SMTPServer = new SMTPServer({
         stream.on('end', async ()=>{
             try{
                 let parsed = await simpleParser(emailData);
-                console.log('Email received. Parsed - ', parsed);
+                // console.log('Email received. Parsed - ', parsed);
                 let email = new EmailModel({
                     from: parsed.from?.text,
                     // @ts-ignore
