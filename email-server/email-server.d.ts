@@ -1,9 +1,7 @@
 interface ProcessEnv {
     NODE_ENV: 'development' | 'production';
     TZ: string;
-    MONGODB_URI:string;
-    SES_SECRET_KEY:string;
-    SES_ACCESS_KEY:string;
+    DB_STRING:string;
 }
 
 declare const process: {

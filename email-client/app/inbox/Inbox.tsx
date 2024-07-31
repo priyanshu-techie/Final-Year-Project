@@ -1,40 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { EmailData } from "./sampleEmails";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 import Link from "next/link";
+import { IEmail } from "../backend/models/email";
+import { FormatDate } from "../backend/utils/FormatDate";
+import extractSenderDetails from "../backend/utils/ExtractFrom";
+import { starEmail } from "./utils/StarEmail";
+import { usePathname } from "next/navigation";
 
-export default function Inbox({ data }: { data: Array<EmailData> }) {
+export default function Inbox({ data }: { data: Array<IEmail> }) {
   const star = useState();
-
-  const starEmail = () => {
-    console.log("starred");
-  };
+  const path = usePathname();
+  const isSentPage = path.startsWith('/sent');
+  console.log("isSenderPga", isSentPage);
 
   return (
     <div className="p-2">
       {data.map((email, ind) => {
+        const emailRead = email.readAt !== null;
+        const sender = isSentPage ? extractSenderDetails(email.to) : extractSenderDetails(email.from);
         return (
-          <Link key={ind} href={'inbox/mail/'+email.id}>    
-            <div
-              className={`w-full border flex justify-between p-3 ${
-                email.read && "bg-blue-50"
-              } hover:border-black hover:cursor-pointer`}
-            >
-              <div onClick={starEmail}>
+          <div
+            key={ind}
+            className={`w-full p-3 border hover:border-black hover:cursor-pointer flex gap-4 ${
+              emailRead && "bg-blue-50"
+            } `}
+          >
+            {/* @ts-ignore */}
+            <div onClick={async()=>{await starEmail(email._id, "/inbox")}}>
+              {email.starred ? (
+                <FaStar className="text-yellow-500" />
+              ) : (
                 <FaRegStar />
+              )}
+            </div>
+            <Link
+              href={"inbox/mail/" + email._id}
+              className="flex justify-between w-full"
+            >
+              <div className={!emailRead ? "font-bold" : ""}>
+                {sender.name}
               </div>
-              <div className={!email.read ? "font-bold" : ""}>{email.from}</div>
               <div className="w-2/3 border-red-800 overflow-hidden text-ellipsis line-clamp-1">
-                <span className={`${!email.read && "font-bold"} me-2`}>
+                <span className={`${!emailRead && "font-bold"} me-2`}>
                   {email.subject}
                 </span>
-                <span>{email.content}</span>
+                <span>{email.message}</span>
               </div>
-              <div>{email.time}</div>
-            </div>
-          </Link>
+              {/* @ts-ignore */}
+              <div>{FormatDate(email.createdAt)}</div>
+            </Link>
+          </div>
         );
       })}
     </div>

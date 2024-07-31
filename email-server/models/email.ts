@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export interface IEmail extends mongoose.Document {
+interface IEmail extends mongoose.Document {
     from:string;
     to: string;
     subject: string;
@@ -9,19 +9,19 @@ export interface IEmail extends mongoose.Document {
     readAt: Date;
     type:"sent"|"received"| "draft" ;
     starred: boolean;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
-const EmailSchema = new mongoose.Schema<IEmail>({
+const emailSchema = new mongoose.Schema<IEmail>({
     from: {type:String, required:true},
     to: {type:String, required:true},
     subject: {type:String, required:true},
     message: {type:String, required:true},
     status: {type:String, required:true},
-    readAt: {type:Date, default:null},
+    readAt: {type:Date,default:null},
     type: {type:String, required:true},
-    starred: {type:Boolean, default:false},
-}, {timestamps: true,});
+    starred: {type:Boolean, default:false},    
+},{timestamps:true})
 
-export const EmailModel: mongoose.Model<IEmail> = mongoose.models && mongoose.models['emails'] || mongoose.model("emails", EmailSchema);
+const EmailModel =  mongoose.model('emails',emailSchema);
+
+export default EmailModel;

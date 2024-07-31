@@ -1,6 +1,9 @@
 import {SMTPServer} from 'smtp-server';
 import { simpleParser } from "mailparser"
+import { connectToDB } from './connection/mongodb';
+import EmailModel from './models/email';
 
+connectToDB();
 
 const server:SMTPServer = new SMTPServer({
     allowInsecureAuth:true,
@@ -17,19 +20,38 @@ const server:SMTPServer = new SMTPServer({
 
     onRcptTo(address, session, callback) {
         console.log('Recive to ', address.address, " session id ", session.id );
-        // if(address.address !== "abc@priyanshudev.tech")
-        //     callback(new Error("Invalid Recipient"));
-        // else
+        if(address.address !== "abc@priyanshudev.tech")
+            callback(new Error("Invalid Recipient"));
+        else
             callback();
     },
 
     onData(stream, session, callback) {
-        stream.on("data",async(data)=>{
-            console.log("On data we are getting this data:");
-            const parsed = await simpleParser(data);
-            console.log(JSON.stringify(parsed));
-        })
-        stream.on("end",callback);
+        let emailData = '';
+        
+        stream.on('data', (chunck)=>{
+            emailData += chunck.toString();
+        });
+
+        stream.on('end', async ()=>{
+            try{
+                let parsed = await simpleParser(emailData);
+                console.log('Email received. Parsed - ', parsed);
+                let email = new EmailModel({
+                    from: parsed.from?.text,
+                    // @ts-ignore
+                    to: parsed.to?.text,
+                    subject: parsed.subject,
+                    message: parsed.text,
+                    status: 'received',
+                    type: 'received'
+                });
+                await email.save();
+            }catch(err){
+                console.log('Error parsing email', err);
+            }
+            callback();
+        });
     },
 })
 

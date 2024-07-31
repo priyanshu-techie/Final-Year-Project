@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "express": "^4.19.2",
     "mailparser": "^3.7.1",
+    "mongoose": "^8.5.2",
     "nodemailer": "^6.9.13",
     "smtp-server": "^3.13.4"
   },
@@ -9,10 +9,10 @@
   "version": "1.0.0",
   "description": "This is a final year project by priyanshu agrawal",
   "devDependencies": {
-    "@types/node": "^20.12.12",
-    "@types/smtp-server": "^3.5.10",
     "@types/express": "^4.17.21",
     "@types/mailparser": "^3.4.4",
+    "@types/node": "^20.12.12",
+    "@types/smtp-server": "^3.5.10",
     "typescript": "^5.4.5"
   },
   "scripts": {

@@ -12,20 +12,62 @@ const transporter = nodemailer.createTransport({
     },
 })
 
+let mailOptionsArray = [
+    {
+        from: '"Abhijeet Prashad" <abdxk@gmail.com>',
+        to: 'abc@priyanshudev.tech',
+        subject: 'Reminder for your LA trip.',
+        text: 'I am writing this to see how are you my friend. Hope you are doing good.',
+        html: '<b>Hello world?</b>'
+    },
+    {
+        from: '"John Doe" <john.doe@example.com>',
+        to: 'abc@priyanshudev.tech',
+        subject: 'Meeting Reminder',
+        text: 'This is a reminder for our meeting scheduled at 3 PM tomorrow.',
+        html: '<b>Meeting Reminder</b>'
+    },
+    {
+        from: '"Jane Smith" <jane.smith@example.com>',
+        to: 'abc@priyanshudev.tech',
+        subject: 'Project Update',
+        text: 'The project is on track and we are expecting to complete it by the end of the month.',
+        html: '<b>Project Update</b>'
+    },
+    {
+        from: '"Alice Johnson" <alice.johnson@example.com>',
+        to: 'abc@priyanshudev.tech',
+        subject: 'Invitation to Webinar',
+        text: 'You are invited to attend our webinar on the latest trends in technology.',
+        html: '<b>Invitation to Webinar</b>'
+    },
+    {
+        from: '"Bob Brown" <bob.brown@example.com>',
+        to: 'abc@priyanshudev.tech',
+        subject: 'Job Opportunity',
+        text: 'We have an exciting job opportunity that matches your profile. Please let us know if you are interested.',
+        html: '<b>Job Opportunity</b>'
+    }
+];
+
 let mailOptions = {
-    from: '"Sender Name" <sender@example.com>', // sender address
-    to: 'recipient@example.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
+    from: '"Pradeep Hooda" <prdph@gmail.com>', // sender address
+    to: 'abc@priyanshudev.tech', // list of receivers
+    subject: 'Hello Priyanshu how are you?', // Subject line
+    text: 'I am writting this to see how are you my friend. Hope you are doing good.', // plain text body
     html: '<b>Hello world?</b>' // html body
 };
 
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-});
+mailOptionsArray.forEach((mailOptions) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+    });
+})
+
+
 
 // import nodemailer from 'nodemailer';
 // import dns from 'dns';
